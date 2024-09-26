@@ -1,15 +1,20 @@
-const http=require('http');
-const server=http.createServer((req,res)=>{
-    res.setHeader('Content-Type', 'text/plain');
-    if (req.url === '/home') {
-        res.write('Welcome home');
-      } else if (req.url === '/about') {
-        res.write('Welcome to About Us page');
-      } else if (req.url === '/node') {
-        res.write('Welcome to my Node Js project');
-      } else {
-        res.write('404 Not Found');  
-      }
-      res.end();
+const http = require('http');
+const express = require('express');
+
+const app=express();
+
+app.use((req,res,next)=>{
+    console.log("in the middleware");
+    next();
 });
-server.listen(4000);
+app.use((req,res,next)=>{
+    console.log("in another middleware");
+    res.send('<h1>Hello from express!</h1>');
+});
+
+const server = http.createServer(app);
+
+
+server.listen(4000, () => {
+    console.log('Server is listening on port 4000');
+});
