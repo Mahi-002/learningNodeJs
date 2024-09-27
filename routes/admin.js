@@ -17,4 +17,16 @@ router.post('/add-product', (req, res, next) => {
   res.redirect('/');
 });
 
+router.get('/contact',(req,res,next)=>{
+  res.sendFile(path.join(rootDir,'views','contact.html'));
+})
+router.post('/contact', (req, res, next) => {
+  console.log(req.body);
+  res.redirect('/contact');
+});
+
+router.post('/success', (req, res, next) => {
+  res.redirect('/success');
+});
+
 module.exports = router;
